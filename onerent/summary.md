@@ -42,11 +42,22 @@ LIMIT 1
 |**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/onerent/longest_comment.md)|
 
 #### 2. Find the shortest comment for every 6months
+Since the comments are made on one day, this query will do.
 ``` SQL
-SELECT body
+SELECT body, to_timestamp(created_utc)
 FROM reddit
-WHERE LENGTH(body) = 1
+WHERE is_submitter = FALSE
+AND LENGTH(body) = 1
 ```
+| body | to_timestamp           |
+|------|------------------------|
+| E    | 2017-10-01 08:00:11+08 |
+| E    | 2017-10-01 08:01:02+08 |
+| B    | 2017-10-01 08:01:24+08 |
+| E    | 2017-10-01 08:01:43+08 |
+| R    | 2017-10-01 08:01:48+08 |
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/Query2%20Results.csv)
+
 #### 3. Find authors will all caps for their usernames
 
 I excluded the usernames without any letters for this query.
