@@ -29,7 +29,7 @@ The data provided was a json file which I downloaded and then converted into a c
 ![Table](https://github.com/raraei/general/blob/master/onerent/Screen%20Shot%202019-08-19%20at%205.46.02%20PM.png)
 
 ## Queries
-#### Find the longest comment
+#### 1. Find the longest comment
 ``` SQL
 SELECT body
 FROM reddit
@@ -41,13 +41,13 @@ LIMIT 1
 |------------------------|
 |**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/onerent/longest_comment.md)|
 
-#### Find the shortest comment for every 6months
+#### 2. Find the shortest comment for every 6months
 ``` SQL
 SELECT body
 FROM reddit
 WHERE LENGTH(body) = 1
 ```
-#### Find authors will all caps for their usernames
+#### 3. Find authors will all caps for their usernames
 
 I excluded the usernames without any letters for this query.
 ``` SQL
@@ -65,7 +65,7 @@ AND author = UPPER(author)
 | AA9126               |
 [Click for full list.](https://github.com/raraei/general/blob/master/onerent/allcaps.csv)
 
-#### Find the sub reddit with most comments
+#### 4. Find the sub reddit with most comments
 ``` SQL
 SELECT subreddit, COUNT(*)
 FROM reddit
@@ -78,7 +78,7 @@ LIMIT 1
 |-----------|-------|
 | AskReddit | 460   |
 
-#### Find the comments created from Oct 1, 2017 to Oct 4, 2017
+#### 5. Find the comments created from Oct 1, 2017 to Oct 4, 2017
 ``` SQL
 SELECT body, to_timestamp(created_utc)
 FROM reddit
@@ -87,7 +87,7 @@ AND to_timestamp(created_utc) BETWEEN '2017-10-01' AND '2017-10-04'
 ```
 [Click for full list.](https://github.com/raraei/general/blob/master/onerent/Query5%20Results.csv)
 
-#### Total count of comments with a score of 3
+#### 6. Total count of comments with a score of 3
 ``` SQL
 SELECT COUNT(score)
 FROM reddit
@@ -99,7 +99,7 @@ HAVING score = 3
 |---------|
 | 830     |
 
-#### Total count of comments per sub reddit
+#### 7. Total count of comments per sub reddit
 ``` SQL
 SELECT subreddit, COUNT(*)
 FROM reddit
@@ -116,14 +116,14 @@ ORDER BY COUNT DESC
 | politics              | 114   |
 [Click for full list.](https://github.com/raraei/general/blob/master/onerent/subreddit_comments.csv)
 
-#### Total count of the word "because"
+#### 8. Total count of the word "because"
 ``` SQL
 SELECT
 ```
 |  count  |
 |---------|
 |      |
-#### Find the user with most comment
+#### 9. Find the user with most comment
 
 I excluded the '[deleted]' author as this will refer to multiple users.
 ``` SQL
@@ -139,7 +139,7 @@ LIMIT 1
 |--------------------|--------|
 | ithinkisaidtoomuch | 	258   |
 
-#### Find the author with most post
+#### 10. Find the author with most post
 ``` SQL
 SELECT author, COUNT(*)
 FROM reddit
@@ -153,7 +153,7 @@ LIMIT 1
 |-------------------|---------|
 | Concise_AMA_Bot   | 	147   |
 
-#### Find the author with the longest name
+#### 11. Find the author with the longest name
 
 I considered the longest name as the ones with most number of characters. Since many usernames have the same length, I have written the query such that it will result to all authors with the longest names.
 ``` SQL
@@ -173,7 +173,7 @@ WHERE LENGTH(author) = (SELECT MAX(LENGTH(author)) FROM reddit)
 [Click for full list.](https://github.com/raraei/general/blob/master/onerent/longest_names.csv)
 
 
-#### Total count of the comments that was edited
+#### 12. Total count of the comments that was edited
 ``` SQL
 SELECT COUNT(*)
 FROM reddit
@@ -183,7 +183,7 @@ AND is_submitter = FALSE
 | count   |
 |---------|
 | 8773    |
-#### Total count of the comments that has more than 600 characters
+#### 13. Total count of the comments that has more than 600 characters
 ``` SQL
 SELECT COUNT(*)
 FROM reddit
@@ -193,7 +193,7 @@ AND length(body) > 600
 | count   |
 |---------|
 | 375    |
-#### List all the subreddits
+#### 14. List all the subreddits
 ``` SQL
 SELECT DISTINCT subreddit
 FROM reddit
