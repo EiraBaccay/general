@@ -1,5 +1,7 @@
 ## Creating the Database
-I created an empty table named `reddit` containing the following columns:
+I created a database in Postgres and connected it to [Postico](https://eggerapps.at/postico/).
+
+In Postico, I created an empty table named `reddit` containing the following columns:
 1. `author`
 2. `is_submitter`: TRUE means that the text is a post, while FALSE means that the text is a comment
 3. `body`: the contents of a post or comment
@@ -22,7 +24,7 @@ CREATE TABLE reddit(
    permalink VARCHAR   
 );
 ```
-The data provided was a json file which I downloaded and then converted into a csv file via http://www.convertcsv.com/json-to-csv.htm. Using Postico, I imported the csv file into table `reddit`.
+The data provided was a json file which I downloaded and then converted into a csv file via http://www.convertcsv.com/json-to-csv.htm. Then, I imported the csv file into table `reddit`.
 
 ## Queries
 - Find the longest comment
@@ -37,8 +39,12 @@ LIMIT 1
 |------------------------|
 |**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/onerent/longest_comment.md)|
 
-- Find the shortest for every 6months
-
+- Find the shortest comment for every 6months
+``` SQL
+SELECT body
+FROM reddit
+WHERE LENGTH(body) = 1
+```
 - Find authors will all caps for their usernames
 
 I excluded the usernames without any letters for this query.
@@ -71,6 +77,13 @@ LIMIT 1
 | AskReddit | 460   |
 
 - Find the comments created from Oct 1, 2017 to Oct 4, 2017
+``` SQL
+SELECT body, to_timestamp(created_utc)
+FROM reddit
+WHERE is_submitter = FALSE
+AND to_timestamp(created_utc) BETWEEN '2017-10-01' AND '2017-10-04'
+```
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/Query5%20Results.csv)
 
 - Total count of comments with a score of 3
 ``` SQL
