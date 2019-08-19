@@ -24,9 +24,9 @@ CREATE TABLE reddit(
    permalink VARCHAR   
 );
 ```
-The data provided was a json file which I downloaded and then converted into a csv file via http://www.convertcsv.com/json-to-csv.htm. Then, I imported the csv file into table `reddit`.
+The data provided was a json file which I downloaded and then converted into a [csv file](https://github.com/raraei/general/blob/master/reddit/reddit.csv) via http://www.convertcsv.com/json-to-csv.htm. Then, I imported the csv file into table `reddit`.
 
-![Table](https://github.com/raraei/general/blob/master/onerent/Screen%20Shot%202019-08-19%20at%205.46.02%20PM.png)
+![Table](https://github.com/raraei/general/blob/master/reddit/reddit_database.png)
 
 ## Queries
 ### 1. Find the longest comment
@@ -39,7 +39,7 @@ LIMIT 1
 ```
 | body                   |
 |------------------------|
-|**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/onerent/longest_comment.md)|
+|**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](hhttps://github.com/raraei/general/blob/master/reddit/longest_comment.md)|
 
 ### 2. Find the shortest comment for every 6months
 Since the comments are made on one day, this query will do.
@@ -56,7 +56,7 @@ AND LENGTH(body) = 1
 | B    | 2017-10-01 08:01:24+08 |
 | E    | 2017-10-01 08:01:43+08 |
 | R    | 2017-10-01 08:01:48+08 |
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/Query2%20Results.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/shortest_comments.csv)
 
 ### 3. Find authors will all caps for their usernames
 
@@ -74,7 +74,7 @@ AND author = UPPER(author)
 | 102WOLFPACK          |
 | A55A551N6847         |
 | AA9126               |
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/allcaps.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/allcaps.csv)
 
 ### 4. Find the sub reddit with most comments
 ``` SQL
@@ -96,7 +96,7 @@ FROM reddit
 WHERE is_submitter = FALSE
 AND to_timestamp(created_utc) BETWEEN '2017-10-01' AND '2017-10-04'
 ```
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/Query5%20Results.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/comments.csv)
 
 ### 6. Total count of comments with a score of 3
 ``` SQL
@@ -125,7 +125,7 @@ ORDER BY COUNT DESC
 | CrazyIdeas            | 261   |
 | news                  | 158   |
 | politics              | 114   |
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/subreddit_comments.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/subreddit_comments.csv)
 
 ### 8. Total count of the word "because"
 ``` SQL
@@ -187,7 +187,7 @@ WHERE LENGTH(author) = (SELECT MAX(LENGTH(author)) FROM reddit)
 | 30bmd972ms910bmt85nd |
 | A_Farewell_to_Clones |
 | Ambitiouscouchpotato |
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/longest_names.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/longest_names.csv)
 
 
 ### 12. Total count of the comments that was edited
@@ -222,5 +222,5 @@ FROM reddit
 | LINKTrader            |
 | ArenaHS               |
 | learnprogramming      |
-[Click for full list.](https://github.com/raraei/general/blob/master/onerent/subreddit_list.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/reddit/subreddit_list.csv)
 
