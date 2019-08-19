@@ -190,7 +190,7 @@ AND length(body) > 600
 ```
 | count   |
 |---------|
-| 8773    |
+| 375    |
 #### List all the subreddits
 ``` SQL
 SELECT DISTINCT subreddit
