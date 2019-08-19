@@ -1,3 +1,30 @@
+## Creating the Database
+I created an empty table named `reddit` containing the following columns:
+1. `author`
+2. `is_submitter`: TRUE means that the text is a post, while FALSE means that the text is a comment
+3. `body`: the contents of a post or comment
+4. `created_utc`: the date when the post/comment was made
+5. `retrieved_on`: the date when the text was retrieved
+6. `subreddit`
+7. `edited`: FALSE means the post/comment was not edited, otherwise, the date when it was last edited is provided
+8. `score`
+9. `permalink`
+``` SQL
+CREATE TABLE reddit(
+   author VARCHAR (50) NOT NULL,
+   is_submitter BOOL,
+   body VARCHAR NOT NULL,
+   created_utc INT NOT NULL,
+   retrieved_on INT NOT NULL,
+   subreddit VARCHAR NOT NULL,
+   edited VARCHAR NOT NULL,
+   score INT,
+   permalink VARCHAR   
+);
+```
+The data provided was a json file which I downloaded and then converted into a csv file via http://www.convertcsv.com/json-to-csv.htm. Using Postico, I imported the csv file into table `reddit`.
+
+## Queries
 - Find the longest comment
 ``` SQL
 SELECT body
@@ -12,7 +39,9 @@ LIMIT 1
 
 - Find the shortest for every 6months
 
-- Find authors will all caps for there usernames
+- Find authors will all caps for their usernames
+
+I excluded the usernames without any letters for this query.
 ``` SQL
 SELECT DISTINCT author
 FROM reddit
@@ -75,6 +104,8 @@ ORDER BY COUNT DESC
 - Total count of the word "because"
 
 - Find the user with most comment
+
+I excluded the '[deleted]' author as this will refer to multiple users.
 ``` SQL
 SELECT author, COUNT(*)
 FROM reddit
@@ -103,6 +134,8 @@ LIMIT 1
 | Concise_AMA_Bot   | 	147   |
 
 - Find the author with the longest name
+
+I considered the longest name as the ones with most number of characters. Since many usernames have the same length, I have written the query such that it will result to all authors with the longest names.
 ``` SQL
 SELECT COUNT(*)
 FROM reddit
