@@ -118,11 +118,17 @@ ORDER BY COUNT DESC
 
 #### 8. Total count of the word "because"
 ``` SQL
-SELECT
+CREATE TABLE because AS
+SELECT regexp_split_to_table(body, E'\\s+') FROM reddit
+```
+``` SQL
+SELECT COUNT(*)
+FROM because
+WHERE regexp_split_to_table SIMILAR TO '%because%'
 ```
 |  count  |
 |---------|
-|      |
+| 600     |
 #### 9. Find the user with most comment
 
 I excluded the '[deleted]' author as this will refer to multiple users.
