@@ -50,7 +50,7 @@ WHERE is_submitter = FALSE
 GROUP BY score
 HAVING score = 3
 ```
-| "count" |
+|  count  |
 |---------|
 | 830     |
 
@@ -83,14 +83,24 @@ GROUP BY author
 ORDER BY COUNT DESC
 LIMIT 1
 ```
-| subreddit | count |
-|-----------|-------|
+| author             | count  |
+|--------------------|--------|
 | ithinkisaidtoomuch | 	258   |
 
 - Find the author with most post
 ``` SQL
-
+SELECT author, COUNT(*)
+FROM reddit
+WHERE author != '[deleted]'
+AND is_submitter = TRUE
+GROUP BY author
+ORDER BY COUNT DESC
+LIMIT 1
 ```
+| author            | count   |
+|-------------------|---------|
+| Concise_AMA_Bot   | 	147   |
+
 - Find the author with the longest name
 ``` SQL
 SELECT COUNT(*)
@@ -99,25 +109,47 @@ WHERE is_submitter
 WHERE LENGTH(author) = (SELECT MAX(LENGTH(author)) FROM reddit)
 ```
 | author               |
-|------------------------|
-| "-Dr-Mantis-Toboggan-" |
-| "-JustAnotherRedditor" |
-| "209u-096727961609276" |
-| "30bmd972ms910bmt85nd" |
-| "A_Farewell_to_Clones" |
-| "Ambitiouscouchpotato" |
+|----------------------|
+| -Dr-Mantis-Toboggan- |
+| -JustAnotherRedditor |
+| 209u-096727961609276 |
+| 30bmd972ms910bmt85nd |
+| A_Farewell_to_Clones |
+| Ambitiouscouchpotato |
 [Click for full list.](https://github.com/raraei/general/blob/master/longestnames.md)
 
 
 - Total count of the comments that was edited
 ``` SQL
-
+SELECT COUNT(*)
+FROM reddit
+WHERE edited != 'FALSE'
+AND is_submitter = FALSE
 ```
+| count   |
+|---------|
+| 8773    |
 - Total count of the comments that has more than 600 characters
 ``` SQL
-
+SELECT COUNT(*)
+FROM reddit
+WHERE is_submitter = FALSE
+AND length(body) > 600
 ```
+| count   |
+|---------|
+| 8773    |
 - List all the subreddits
 ``` SQL
-
+SELECT DISTINCT subreddit
+FROM reddit
 ```
+| subreddit             |
+|-----------------------|
+| raspberry_pi          |
+| Monsanto              |
+| LINKTrader            |
+| ArenaHS               |
+| learnprogramming      |
+[Click for full list.](https://github.com/raraei/general/blob/master/subreddit_list.csv)
+
