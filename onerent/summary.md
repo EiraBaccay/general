@@ -6,11 +6,12 @@ WHERE is_submitter = FALSE
 ORDER BY LENGTH(body) DESC
 LIMIT 1
 ```
-| body               |
+| body                   |
 |------------------------|
-|**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/longestcomment.md)|
+|**Deep Purple**    [artist pic](https://lastfm-img2.akamaized.net/i/u/252/a0dc0410107a4df586c34d34191fabdb.png)    &gt; Deep Purple is an English hard rock band that formed in Hertfordshire in 1968. Together with groups such as  Black Sabbath and Led Zeppelin, they're considered as heavy metal pioneers... [Click for more](https://github.com/raraei/general/blob/master/onerent/longest_comment.md)|
 
 - Find the shortest for every 6months
+
 - Find authors will all caps for there usernames
 ``` SQL
 SELECT DISTINCT author
@@ -18,14 +19,14 @@ FROM reddit
 WHERE author SIMILAR TO '%[A-Z]%'
 AND author = UPPER(author) 
 ```
-| author                |
-|------------------------|
-| "---YNWA---"           |
-| "-JAS0N-"              |
-| "102WOLFPACK"          |
-| "A55A551N6847"         |
-| "AA9126"               |
-[Click for full list.](https://github.com/raraei/general/blob/master/allcaps.md)
+| author               |
+|----------------------|
+| ---YNWA---           |
+| -JAS0N-              |
+| 102WOLFPACK          |
+| A55A551N6847         |
+| AA9126               |
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/allcaps.csv)
 
 - Find the sub reddit with most comments
 ``` SQL
@@ -69,7 +70,7 @@ ORDER BY COUNT DESC
 | CrazyIdeas            | 261   |
 | news                  | 158   |
 | politics              | 114   |
-[Click for full list.](https://github.com/raraei/general/blob/master/subreddit_comments.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/subreddit_comments.csv)
 
 - Total count of the word "because"
 
@@ -116,7 +117,7 @@ WHERE LENGTH(author) = (SELECT MAX(LENGTH(author)) FROM reddit)
 | 30bmd972ms910bmt85nd |
 | A_Farewell_to_Clones |
 | Ambitiouscouchpotato |
-[Click for full list.](https://github.com/raraei/general/blob/master/longestnames.md)
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/longest_names.csv)
 
 
 - Total count of the comments that was edited
@@ -151,5 +152,5 @@ FROM reddit
 | LINKTrader            |
 | ArenaHS               |
 | learnprogramming      |
-[Click for full list.](https://github.com/raraei/general/blob/master/subreddit_list.csv)
+[Click for full list.](https://github.com/raraei/general/blob/master/onerent/subreddit_list.csv)
 
