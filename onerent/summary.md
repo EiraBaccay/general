@@ -26,6 +26,8 @@ CREATE TABLE reddit(
 ```
 The data provided was a json file which I downloaded and then converted into a csv file via http://www.convertcsv.com/json-to-csv.htm. Then, I imported the csv file into table `reddit`.
 
+![Table](https://github.com/raraei/general/blob/master/onerent/Screen%20Shot%202019-08-19%20at%205.46.02%20PM.png)
+
 ## Queries
 #### Find the longest comment
 ``` SQL
